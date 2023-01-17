@@ -1,9 +1,8 @@
+/*-------Codigo para poder hacer funcionar todos los enventos de la pagina---------*/
 (function() {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
+  /*---------Seccion de ayuda---------*/
   const select = (el, all = false) => {
     el = el.trim()
     if (all) {
@@ -13,9 +12,7 @@
     }
   }
 
-  /**
-   * Easy event listener function
-   */
+  /*---------Listener Funtion---------*/
   const on = (type, el, listener, all = false) => {
     let selectEl = select(el, all)
     if (selectEl) {
@@ -27,16 +24,12 @@
     }
   }
 
-  /**
-   * Easy on scroll event listener 
-   */
+  /*-----------Scroll Listener----------*/
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
   }
 
-  /**
-   * Navbar links active state on scroll
-   */
+  /*----------Enlaces del menu activos al hacer scroll----------*/
   let navbarlinks = select('#navbar .scrollto', true)
   const navbarlinksActive = () => {
     let position = window.scrollY + 200
@@ -54,9 +47,7 @@
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
 
-  /**
-   * Scrolls to an element with header offset
-   */
+  /*---------Desplazamiento hacia el encabezado---------*/
   const scrollto = (el) => {
     let header = select('#header')
     let offset = header.offsetHeight
@@ -72,9 +63,7 @@
     })
   }
 
-  /**
-   * Header fixed top on scroll
-   */
+  /*-----------Seccion para fijar el encabezado superior---------*/
   let selectHeader = select('#header')
   if (selectHeader) {
     let headerOffset = selectHeader.offsetTop
@@ -92,9 +81,7 @@
     onscroll(document, headerFixed)
   }
 
-  /**
-   * Back to top button
-   */
+  /*---------Boton para volver al inicio---------*/
   let backtotop = select('.back-to-top')
   if (backtotop) {
     const toggleBacktotop = () => {
@@ -108,18 +95,14 @@
     onscroll(document, toggleBacktotop)
   }
 
-  /**
-   * Mobile nav toggle
-   */
+  /*---------Navegacion del celular---------*/
   on('click', '.mobile-nav-toggle', function(e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
   })
 
-  /**
-   * Mobile nav dropdowns activate
-   */
+  /*--------Dropdown menu en el movil--------*/
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
@@ -127,9 +110,7 @@
     }
   }, true)
 
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
+  /*-----------Seccion de Scrollto----------*/
   on('click', '.scrollto', function(e) {
     if (select(this.hash)) {
       e.preventDefault()
@@ -145,9 +126,7 @@
     }
   }, true)
 
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
+  /*----------Scroll hasta el URL----------*/
   window.addEventListener('load', () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
@@ -156,9 +135,7 @@
     }
   });
 
-  /**
-   * Preloader
-   */
+  /*--------Circulo de carga--------*/
   let preloader = select('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
@@ -166,9 +143,7 @@
     });
   }
 
-  /**
-   * Porfolio isotope and filter
-   */
+  /*----------Filtro de los trabajos----------*/
   window.addEventListener('load', () => {
     let portfolioContainer = select('.portfolio-container');
     if (portfolioContainer) {
@@ -196,16 +171,12 @@
 
   });
 
-  /**
-   * Initiate portfolio lightbox 
-   */
+  /*---------Abre la imagen en una ventana modal---------*/
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
   });
 
-  /**
-   * Portfolio details slider
-   */
+  /*---------Cambiar imagen en el portafolio---------*/
   new Swiper('.portfolio-details-slider', {
     speed: 400,
     loop: true,
@@ -220,9 +191,7 @@
     }
   });
 
-  /**
-   * Animation on scroll
-   */
+  /*----------Animacion del Scroll----------*/
   window.addEventListener('load', () => {
     AOS.init({
       duration: 1000,
@@ -233,3 +202,4 @@
   });
 
 })()
+/*-------------Fin de las funciones-------------*/
